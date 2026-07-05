@@ -26,4 +26,29 @@ public class EnrollmentRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Enrollment create(Enrollment enrollment) {
+        int nextId = enrollments.stream().mapToInt(Enrollment::getId).max().orElse(0) + 1;
+
+        enrollment.setId(nextId);
+        enrollments.add(enrollment);
+        return enrollment;
+    }
+
+    public Enrollment update(int id, Enrollment enrollment) {
+        Enrollment existing = findById(id);
+
+        if (existing == null) return null;
+        existing.setStudentName(enrollment.getStudentName());
+        existing.setCourseId(enrollment.getCourseId());
+        return existing;
+    }
+
+    public Enrollment deleteById(int id) {
+        Enrollment existing = findById(id);
+
+        if (existing == null) return null;
+        enrollments.remove(existing);
+        return existing;
+    }
 }

@@ -26,4 +26,27 @@ public class CourseRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Course create(Course course) {
+        int nextId = courses.stream().mapToInt(Course::getId).max().orElse(0) + 1;
+        course.setId(nextId);
+        courses.add(course);
+        return course;
+    }
+
+    public Course update(int id, Course course) {
+        Course existing = findById(id);
+        if (existing == null) return null;
+        existing.setTitle(course.getTitle());
+        existing.setStatus(course.getStatus());
+        existing.setInstructorId(course.getInstructorId());
+        return existing;
+    }
+
+    public Course deleteById(int id) {
+        Course existing = findById(id);
+        if (existing == null) return null;
+        courses.remove(existing);
+        return existing;
+    }
 }

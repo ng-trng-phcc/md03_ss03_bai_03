@@ -26,4 +26,26 @@ public class InstructorRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Instructor create(Instructor instructor) {
+        int nextId = instructors.stream().mapToInt(Instructor::getId).max().orElse(0) + 1;
+        instructor.setId(nextId);
+        instructors.add(instructor);
+        return instructor;
+    }
+
+    public Instructor update(int id, Instructor instructor) {
+        Instructor existing = findById(id);
+        if (existing == null) return null;
+        existing.setName(instructor.getName());
+        existing.setEmail(instructor.getEmail());
+        return existing;
+    }
+
+    public Instructor deleteById(int id) {
+        Instructor existing = findById(id);
+        if (existing == null) return null;
+        instructors.remove(existing);
+        return existing;
+    }
 }

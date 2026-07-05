@@ -17,11 +17,23 @@ public class InstructorService {
         this.instructorRepository = instructorRepository;
     }
 
-    public List<Instructor> findAll() {
+    public List<Instructor> getAllInstructors() {
         return instructorRepository.findAll();
     }
 
-    public Instructor findById(int id) {
+    public Instructor getInstructorById(int id) {
         return instructorRepository.findById(id);
+    }
+
+    public Instructor createInstructor(Instructor instructor) {
+        return instructorRepository.create(instructor);
+    }
+
+    public Instructor updateInstructor(int id, Instructor instructor) {
+        return instructorRepository.update(id, instructor);
+    }
+
+    public Instructor deleteInstructorById(int id) {
+        return instructorRepository.deleteById(id);
     }
 }

@@ -17,11 +17,23 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public List<Course> findAll() {
+    public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    public Course findById(int id) {
+    public Course getCourseById(int id) {
         return courseRepository.findById(id);
+    }
+
+    public Course createCourse(Course course) {
+        return courseRepository.create(course);
+    }
+
+    public Course updateCourse(int id, Course course) {
+        return courseRepository.update(id, course);
+    }
+
+    public Course deleteCourseById(int id) {
+        return courseRepository.deleteById(id);
     }
 }
